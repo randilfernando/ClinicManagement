@@ -1,4 +1,4 @@
-package clinicmanagement;
+package com.alternate.clinicmanagement;
 
 /**
  * Created by Randil Fernando on 11/8/2016.

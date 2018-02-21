@@ -1,11 +1,11 @@
-package clinicmanagement;
+package com.alternate.clinicmanagement.service;
 
-import domain.*;
+import com.alternate.clinicmanagement.domain.*;
 
 /**
  * Created by Randil Fernando on 11/7/2016.
  */
-public class ClinicHandler
+public class ClinicService
 {
     private Clinic clinic;
     private Doctor selectedDoctor;
@@ -13,7 +13,7 @@ public class ClinicHandler
     private Medicine selectedMedicine;
     private Prescription selectedPrescription;
 
-    public ClinicHandler(String clinicName){
+    public ClinicService(String clinicName){
         clinic = new Clinic(clinicName);
     }
 
@@ -58,29 +58,17 @@ public class ClinicHandler
 
     public boolean getDoctor(String name){
         selectedDoctor = clinic.getDoctor(name);
-        if (selectedDoctor == null){
-            return false;
-        }else{
-            return true;
-        }
+        return selectedDoctor != null;
     }
 
     public boolean getPatient(String name){
         selectedPatient = clinic.getPatient(name);
-        if (selectedPatient == null) {
-            return false;
-        }else {
-            return true;
-        }
+        return selectedPatient != null;
     }
 
     public boolean getMedicine(String drug){
         selectedMedicine = clinic.getMedicine(drug);
-        if (selectedMedicine == null) {
-            return false;
-        }else {
-            return true;
-        }
+        return selectedMedicine != null;
     }
 
     public boolean createPrescription(){

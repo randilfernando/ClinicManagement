@@ -1,4 +1,4 @@
-package domain;
+package com.alternate.clinicmanagement.domain;
 
 import java.io.*;
 import java.util.ArrayList;

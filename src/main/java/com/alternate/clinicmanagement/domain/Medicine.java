@@ -1,4 +1,4 @@
-package domain;
+package com.alternate.clinicmanagement.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public abstract class Medicine implements Serializable {
     private Date expDate;
     private ArrayList<String> reactList;
 
-    public Medicine(String brand, String drug, String weight) {
+    Medicine(String brand, String drug, String weight) {
         this.brand = brand;
         this.drug = drug;
         this.weight = weight;

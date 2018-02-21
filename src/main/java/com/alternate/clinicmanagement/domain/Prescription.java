@@ -1,4 +1,4 @@
-package domain;
+package com.alternate.clinicmanagement.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class Prescription implements Serializable {
     public boolean addEntry(PrescriptionEntry p) {
         for (String name : p.getMedicine().getReactList()) {
             for (PrescriptionEntry pE : entries) {
-                if (pE.getMedicine().getDrug() == name) return false;
+                if (pE.getMedicine().getDrug().equals(name)) return false;
             }
         }
         entries.add(p);

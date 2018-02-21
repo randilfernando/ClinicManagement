@@ -1,9 +1,7 @@
-package clinicmanagement;
+package com.alternate.clinicmanagement;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-import domain.Medicine;
-import domain.Prescription;
-import domain.PrescriptionEntry;
+import com.alternate.clinicmanagement.service.ClinicService;
+import com.alternate.clinicmanagement.domain.*;
 
 import java.util.Scanner;
 
@@ -12,7 +10,7 @@ import java.util.Scanner;
  */
 public class ClinicConsole {
     private static Scanner console;
-    private static ClinicHandler clinicHandler;
+    private static ClinicService clinicService;
 
     //<editor-fold defaultstate="collapsed" desc="Add Menus">
     private static void addDoctor(){
@@ -21,7 +19,7 @@ public class ClinicConsole {
         dname = console.next();
         System.out.print("Enter age: ");
         dage = console.next();
-        if(clinicHandler.addDoctor(dname, dage)){
+        if(clinicService.addDoctor(dname, dage)){
             System.out.println("Successful");
         }
     }
@@ -32,7 +30,7 @@ public class ClinicConsole {
         pname = console.next();
         System.out.print("Enter age: ");
         page = console.next();
-        if(clinicHandler.addPatient(pname, page)){
+        if(clinicService.addPatient(pname, page)){
             System.out.println("Successful");
         }
     }
@@ -45,7 +43,7 @@ public class ClinicConsole {
         brand = console.next();
         System.out.print("Enter weight: ");
         weight = console.next();
-        if(clinicHandler.addTablet(drug, brand, weight)){
+        if(clinicService.addTablet(drug, brand, weight)){
             System.out.println("Successful");
         }
     }
@@ -58,7 +56,7 @@ public class ClinicConsole {
         brand = console.next();
         System.out.print("Enter weight: ");
         weight = console.next();
-        if(clinicHandler.addCapsule(drug, brand, weight)){
+        if(clinicService.addCapsule(drug, brand, weight)){
             System.out.println("Successful");
         }
     }
@@ -70,8 +68,8 @@ public class ClinicConsole {
         System.out.print("Enter medicine name: ");
         mname = console.next();
         while (!mname.equals("q")) {
-            if (clinicHandler.getMedicine(mname)) {
-                System.out.println("Selected medicine: " + clinicHandler.getSelectedMedicine().getDrug());
+            if (clinicService.getMedicine(mname)) {
+                System.out.println("Selected medicine: " + clinicService.getSelectedMedicine().getDrug());
                 return true;
             }
             System.out.println("No such entry found. Enter the name again or press 'q' to exit.....");
@@ -85,8 +83,8 @@ public class ClinicConsole {
         System.out.print("Enter doctor name: ");
         dname = console.next();
         while (!dname.equals("q")) {
-            if (clinicHandler.getDoctor(dname)) {
-                System.out.println("Selected doctor: " + clinicHandler.getSelectedDoctor().getName());
+            if (clinicService.getDoctor(dname)) {
+                System.out.println("Selected doctor: " + clinicService.getSelectedDoctor().getName());
                 return true;
             }
             System.out.println("No such entry found. Enter the name again or press 'q' to exit.....");
@@ -100,8 +98,8 @@ public class ClinicConsole {
         System.out.print("Enter patient name: ");
         pname = console.next();
         while (!pname.equals("q")) {
-            if (clinicHandler.getPatient(pname)) {
-                System.out.println("Selected patient: " + clinicHandler.getSelectedPatient().getName());
+            if (clinicService.getPatient(pname)) {
+                System.out.println("Selected patient: " + clinicService.getSelectedPatient().getName());
                 return true;
             }
             System.out.println("No such entry found. Enter the name again or press 'q' to exit.....");
@@ -114,7 +112,7 @@ public class ClinicConsole {
     //<editor-fold defaultstate="collapsed" desc="Prescriptions">
     private static void addPrescription(){
         searchDoctor();
-        clinicHandler.createPrescription();
+        clinicService.createPrescription();
         String amount,interval,taken;
         System.out.println("1.Add entry\n2.finalize");
         String addentry = "1";
@@ -126,7 +124,7 @@ public class ClinicConsole {
                 interval = console.next();
                 System.out.println("Enter time taken");
                 taken = console.next();
-                if (clinicHandler.addPrescriptionEntry(amount,interval,taken)){
+                if (clinicService.addPrescriptionEntry(amount,interval,taken)){
                     System.out.println("Successful");
                 }else{
                     System.out.println("Reacting medicine already in the prescription!");
@@ -135,11 +133,11 @@ public class ClinicConsole {
             System.out.println("1.Add entry\n2.finalize");
             addentry = console.next();
         }
-        clinicHandler.finalisePrescription();
+        clinicService.finalisePrescription();
     }
 
     private static void printPrescription(){
-        for (Prescription p : clinicHandler.getSelectedPatient().getPrescriptions()) {
+        for (Prescription p : clinicService.getSelectedPatient().getPrescriptions()) {
             System.out.println("-----------------------------------------------------------------------------------------");
             System.out.println(String.format("Prescription [%s]", p.getDate()));
             System.out.println("Dr. " + p.getDoctor().getName());
@@ -206,16 +204,16 @@ public class ClinicConsole {
     //<editor-fold defaultstate="collapsed" desc="SubSelection">
     private static void medicineSelection(){
         System.out.println("1.Add reacting medicine\n2.Back");
-        String medName = "";
+        String medName;
         if (console.next().equals("1")){
-            Medicine temp = clinicHandler.getSelectedMedicine();
+            Medicine temp = clinicService.getSelectedMedicine();
             System.out.println("Searching medicine..............");
             System.out.print("Enter medicine name: ");
             medName = "";
             while (!medName.equals("q")) {
                 medName = console.next();
-                if (clinicHandler.getMedicine(medName)) {
-                    clinicHandler.addReactMed(temp);
+                if (clinicService.getMedicine(medName)) {
+                    clinicService.addReactMed(temp);
                     break;
                 }
                 System.out.println("No such entry found. Enter the name again or press 'q' to exit.....");
@@ -246,7 +244,7 @@ public class ClinicConsole {
     public static void clinicConsoleRun(){
         console = new Scanner(System.in);
         System.out.print("Enter new clinic name: ");
-        clinicHandler = new ClinicHandler(console.next());
+        clinicService = new ClinicService(console.next());
         printMenu();
         System.out.println("=========================================================================================");
 

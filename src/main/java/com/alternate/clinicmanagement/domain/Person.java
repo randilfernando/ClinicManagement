@@ -1,4 +1,4 @@
-package domain;
+package com.alternate.clinicmanagement.domain;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ public abstract class Person implements Serializable {
     private String name;
     private int age;
 
-    public Person(String name, int age) {
+    Person(String name, int age) {
         this.age = age;
         this.name = name;
     }
