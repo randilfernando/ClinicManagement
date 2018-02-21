@@ -10,7 +10,7 @@ import java.util.Date;
 public class Prescription implements Serializable {
     private Doctor doctor;
     private Date date;
-    private ArrayList<PrescriptionEntry> entries;
+    private final ArrayList<PrescriptionEntry> entries;
 
     public Prescription(Doctor doctor) {
         this.doctor = doctor;

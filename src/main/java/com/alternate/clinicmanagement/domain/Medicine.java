@@ -12,7 +12,7 @@ public abstract class Medicine implements Serializable {
     private String drug;
     private String weight;
     private Date expDate;
-    private ArrayList<String> reactList;
+    private final ArrayList<String> reactList;
 
     Medicine(String brand, String drug, String weight) {
         this.brand = brand;

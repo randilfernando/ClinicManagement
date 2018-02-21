@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Randil Fernando on 11/5/2016.
  */
 public class Patient extends Person implements Serializable {
-    private ArrayList<Prescription> prescriptions;
+    private final ArrayList<Prescription> prescriptions;
 
     public Patient(String name, int age) {
         super(name, age);

@@ -7,7 +7,7 @@ import com.alternate.clinicmanagement.domain.*;
  */
 public class ClinicService
 {
-    private Clinic clinic;
+    private final Clinic clinic;
     private Doctor selectedDoctor;
     private Patient selectedPatient;
     private Medicine selectedMedicine;

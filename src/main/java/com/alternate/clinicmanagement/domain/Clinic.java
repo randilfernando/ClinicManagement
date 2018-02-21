@@ -7,10 +7,10 @@ import java.util.ArrayList;
  * Created by Randil Fernando on 11/5/2016.
  */
 public class Clinic implements Serializable {
+    private final ArrayList<Medicine> medicines;
+    private final ArrayList<Doctor> doctors;
+    private final ArrayList<Patient> patients;
     private String name;
-    private ArrayList<Medicine> medicines;
-    private ArrayList<Doctor> doctors;
-    private ArrayList<Patient> patients;
 
     public Clinic(String name) {
         this.name = name;
@@ -21,6 +21,10 @@ public class Clinic implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     //<editor-fold defaultstate="collapsed" desc="add data">
